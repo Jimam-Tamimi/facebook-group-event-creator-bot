@@ -69,7 +69,7 @@ for _ in range(20):
 eventDateInput.send_keys("10 Aug 2022")
 
 
-eventTimeInput = WebDriverWait(driver, DELAY).until(lambda d: d.find_elements(By.CSS_SELECTOR, 'input.oajrlxb2.f1sip0of.hidtqoto.e70eycc3.lzcic4wl.g5ia77u1.gcieejh5.bn081pho.humdl8nn.izx4hr6d.rq0escxv.oo9gr5id.jagab5yi.knj5qynh.fo6rh5oj.osnr6wyh.hv4rvrfc.dati1w0a.p0x8y401.k4urcfbm'))[2]
+eventTimeInput = WebDriverWait(driver, DELAY).until(lambda d: d.find_elements(By.CSS_SELECTOR, 'input.oajrlxb2.f1sip0of.hidtqoto.e70eycc3.lzcic4wl.g5ia77u1.gcieejh5.bn081pho.humdl8nn.izx4hr6d.rq0escxv.oo9gr5id.jagab5yi.knj5qynh.fo6rh5oj.osnr6wyh.hv4rvrfc.dati1w0a.p0x8y401.k4urcfbm'))[1]
 
 
 for _ in range(20):
@@ -79,11 +79,13 @@ eventTimeInput.send_keys("20:34")
 
 
 nextBtn = WebDriverWait(driver, DELAY).until(lambda d: d.find_elements(By.CSS_SELECTOR, "span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.fe6kdd0r.mau55g9w.c8b282yb.keod5gw0.nxhoafnm.aigsh9s9.d3f4x2em.iv3no6db.gfeo3gy3.a3bd9o3v.lrazzd5p.bwm1u5wc"))[2]
+# for i, b in enumerate(nextBtn):
+#     print(i, b.text)
 ActionChains(driver).move_to_element(nextBtn).click(nextBtn).perform()
 
 
 
-location = WebDriverWait(driver, DELAY).until(lambda d: d.find_elements(By.CSS_SELECTOR, "span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.fe6kdd0r.mau55g9w.c8b282yb.keod5gw0.nxhoafnm.aigsh9s9.d3f4x2em.mdeji52x.jagab5yi.g1cxx5fr.ekzkrbhg.oo9gr5id.hzawbc8m"))[1]
+location = WebDriverWait(driver, DELAY).until(lambda d: d.find_elements(By.CSS_SELECTOR, "span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.fe6kdd0r.mau55g9w.c8b282yb.keod5gw0.nxhoafnm.aigsh9s9.d3f4x2em.mdeji52x.jagab5yi.g1cxx5fr.ekzkrbhg.oo9gr5id.hzawbc8m"))[2]
 ActionChains(driver).move_to_element(location).click(location).perform()
 
 
@@ -104,12 +106,41 @@ ActionChains(driver).move_to_element(descriptionInput).send_keys_to_element(desc
 nextBtn = WebDriverWait(driver, DELAY).until(lambda d: d.find_elements(By.CSS_SELECTOR, "span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.fe6kdd0r.mau55g9w.c8b282yb.keod5gw0.nxhoafnm.aigsh9s9.d3f4x2em.iv3no6db.gfeo3gy3.a3bd9o3v.lrazzd5p.bwm1u5wc"))[2]
 ActionChains(driver).move_to_element(nextBtn).click(nextBtn).perform()
 
+nextBtn = WebDriverWait(driver, DELAY).until(lambda d: d.find_elements(By.CSS_SELECTOR, "span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.fe6kdd0r.mau55g9w.c8b282yb.keod5gw0.nxhoafnm.aigsh9s9.d3f4x2em.iv3no6db.gfeo3gy3.a3bd9o3v.lrazzd5p.bwm1u5wc"))[2]
+ActionChains(driver).move_to_element(nextBtn).click(nextBtn).perform()
+
+
+
+sleep(10)
+createEvent = WebDriverWait(driver, DELAY).until(lambda d: d.find_element(By.LINK_TEXT, 'Edit')) 
+createEvent.click()
+
+sleep(1)
+nextBtn = WebDriverWait(driver, DELAY).until(lambda d: d.find_elements(By.CSS_SELECTOR, "div.rq0escxv.l9j0dhe7.du4w35lb.j83agx80.cbu4d94t.d2edcug0.hpfvmrgz.rj1gh0hx.buofh1pr.g5gj957u.ph5uu5jm.b3onmgus.e5nlhep0.ecm0bbzt"))[0]
+# for i, n in enumerate(nextBtn):
+#     print(i, n.text)
+    
+# exit()
+ActionChains(driver).move_to_element(nextBtn).click(nextBtn).perform()
+
+nextBtn = WebDriverWait(driver, DELAY).until(lambda d: d.find_elements(By.CSS_SELECTOR, "div.rq0escxv.l9j0dhe7.du4w35lb.j83agx80.cbu4d94t.d2edcug0.hpfvmrgz.rj1gh0hx.buofh1pr.g5gj957u.ph5uu5jm.b3onmgus.e5nlhep0.ecm0bbzt"))[0]
+ActionChains(driver).move_to_element(nextBtn).click(nextBtn).perform()
+
+
+nextBtn = WebDriverWait(driver, DELAY).until(lambda d: d.find_elements(By.CSS_SELECTOR, "div.rq0escxv.l9j0dhe7.du4w35lb.j83agx80.cbu4d94t.d2edcug0.hpfvmrgz.rj1gh0hx.buofh1pr.g5gj957u.ph5uu5jm.b3onmgus.e5nlhep0.ecm0bbzt"))[0]
+ActionChains(driver).move_to_element(nextBtn).click(nextBtn).perform()
+
+
+
 imageDel = WebDriverWait(driver, DELAY).until(lambda d: d.find_element(By.CSS_SELECTOR, ".j83agx80.b5fwa0m2.pmk7jnqg.plgsh5y4")) 
 ActionChains(driver).move_to_element(imageDel).click(imageDel).perform()
 
 imageInp = WebDriverWait(driver, DELAY).until(lambda d: d.find_element(By.CSS_SELECTOR, "input.mkhogb32"))
 imageInp.send_keys(os.getcwd() + "\\images\\test event2.jpg")
 
+
+# driver.implicitly_wait(10)
 sleep(10)
-nextBtn = WebDriverWait(driver, DELAY).until(lambda d: d.find_elements(By.CSS_SELECTOR, "span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.fe6kdd0r.mau55g9w.c8b282yb.keod5gw0.nxhoafnm.aigsh9s9.d3f4x2em.iv3no6db.gfeo3gy3.a3bd9o3v.lrazzd5p.bwm1u5wc"))[2]
+nextBtn = WebDriverWait(driver, DELAY).until(lambda d: d.find_elements(By.CSS_SELECTOR, "div.rq0escxv.l9j0dhe7.du4w35lb.j83agx80.cbu4d94t.d2edcug0.hpfvmrgz.rj1gh0hx.buofh1pr.g5gj957u.ph5uu5jm.b3onmgus.e5nlhep0.ecm0bbzt"))[0]
 ActionChains(driver).move_to_element(nextBtn).click(nextBtn).perform()
+
