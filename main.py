@@ -195,11 +195,10 @@ class Ui_MainWindow(object):
         groupsData = pd.read_csv(self.groupListLocation)
         
         
-        failedGroups = ""
         
         newAccountList = []
         tmpAccount = []
-        brIndex = int(len(accountsData) / 5)
+        brIndex = int(len(accountsData) / 4)
         for i, accountsRow in accountsData.iterrows():
             tmpAccount.append(accountsRow)
             if(brIndex!=0 and  i%brIndex==0 and i!=0):
@@ -208,6 +207,8 @@ class Ui_MainWindow(object):
                 tmpAccount = []
                 
         newAccountList.append(tmpAccount)                    
+        
+ 
         for i, accountsRowList in enumerate(newAccountList):
             def runProcess():
                 driver = webdriver.Chrome(executable_path='./chromedriver.exe')                
@@ -228,13 +229,14 @@ class Ui_MainWindow(object):
                         sleep(2)
                         driver.get("https://www.facebook.com/")
 
-                        try:
-                            myElem = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div[2]/div/div/div/div[3]/div/div[2]/div/div/div/div[1]/div/div[1]/span')))
-                        except TimeoutException:
-                            # accountsData.drop(i, inplace=True)
-                            driver.delete_all_cookies()
-                            
-                            continue
+                        # try:
+                        myElem = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div[2]/div/div/div/div[3]/div/div[2]/div/div/div/div[1]/div/div[1]/span')))
+                        # except TimeoutException:
+                        #     # accountsData.drop(i, inplace=True)
+                        #     driver.delete_all_cookies()
+                        #     with open(f"{currentTime}/failedGroups.txt", "a+") as fg:
+                        #         fg.write(f"Event creation failed with user: {accountsRow[0]} for group: {groupRow[0]}\n")
+                        #     continue
                 
                         for i, groupRow in groupsData.iterrows():
                             try:
@@ -386,12 +388,14 @@ class Ui_MainWindow(object):
                                 
 
                                 ActionChains(driver).move_to_element(updateBtn).click(updateBtn).perform()
-                                print("\n\n")
-                                print({"account": accountsRow, "group": groupRow})
-                                print("\n\n")
+                                with open(f"{currentTime}/successGroups.txt", "a+") as fg:
+                                    fg.write(f"Event creation successful with user: {accountsRow[0]} for group: {groupRow[0]}\n")
+                                
+                                sleep(6)
+                                
                             except Exception as e:
-                                print({"e":e})
-                                # failedGroups += f"Event creation failed with user: {accountsRow[0]} for group: {groupRow[0]}\n"
+                                with open(f"{currentTime}/failedGroups.txt", "a+") as fg:
+                                    fg.write(f"Event creation failed with user: {accountsRow[0]} for group: {groupRow[0]}\n")
                                 continue
                         
                         # logout1 = WebDriverWait(driver, DELAY).until(lambda d: d.find_element(By.XPATH, "/html/body/div[1]/div/div[1]/div/div[2]/div[4]/div[1]/span/div/div[1]"))
@@ -403,18 +407,18 @@ class Ui_MainWindow(object):
                         driver.get("https://www.facebook.com/")
                         
                     except Exception as e:
+                        with open(f"{currentTime}/failedAccounts.txt", "a+") as fg:
+                            fg.write(f"Event creation failed with account: {accountsRow[0]} passwordL {accountsRow[1]}\n")
                         driver.delete_all_cookies()
-                        
                         continue
                 
-            Thread(target=runProcess).start()
-            # break
-            
-        
-        with open(f"{currentTime}/failedGroups.txt", "w") as fg:
-            fg.write(failedGroups)
+                with open(f"{currentTime}/completedAccounts.txt", "a+") as fg:
+                    fg.write(f"username {accountsRow[0]} password {accountsRow[1]}\n completed" )
+            t = Thread(target=runProcess)
+            t.start()
+            sleep(4)
+ 
 
-        # Thread(target=run).start()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
